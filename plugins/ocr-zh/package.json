@@ -1,0 +1,19 @@
+{
+  "name": "ocr-zh",
+  "version": "1.0.0",
+  "description": "On-device Chinese OCR via ML Kit",
+  "main": "dist/plugin.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "android/",
+    "dist/"
+  ],
+  "capacitor": {
+    "android": {
+      "src": "android"
+    }
+  },
+  "peerDependencies": {
+    "@capacitor/core": ">=8.0.0"
+  }
+}

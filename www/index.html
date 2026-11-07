@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="高中错题本 — 记录、归纳与复习各科题目" />
+  <meta name="color-scheme" content="light" />
+  <title>高中错题本</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%233d5a80'/%3E%3Ctext x='16' y='22' text-anchor='middle' fill='white' font-size='16' font-family='sans-serif'%3E题%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="vendor/katex/katex.min.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .ocr-bar {
+      display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 10px;
+      align-items: center;
+    }
+    .ocr-bar .btn-ocr {
+      background: #e8eef6; color: #2a4060; border: 1px solid #c9d0dc;
+    }
+    .ocr-bar .btn-ocr:hover { background: #d9e4f2; }
+    .ocr-progress {
+      font-size: 13px; color: var(--text-muted); display: none;
+      width: 100%;
+    }
+    .ocr-progress.show { display: block; }
+    .ocr-progress .spin {
+      display: inline-block; width: 12px; height: 12px;
+      border: 2px solid #c9d0dc; border-top-color: #3d5a80;
+      border-radius: 50%; animation: ocrspin .7s linear infinite;
+      vertical-align: -1px; margin-right: 6px;
+    }
+    @keyframes ocrspin { to { transform: rotate(360deg); } }
+    body {
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-mark">题</div>
+        <div class="brand-text">
+          <strong>高中错题本</strong>
+          <span>归纳 · 复习 · 提升</span>
+        </div>
+        <button type="button" class="sidebar-close" id="sidebarClose" aria-label="关闭菜单">✕</button>
+      </div>
+      <nav class="sidebar-nav" aria-label="主导航">
+        <a href="#/" class="nav-item" data-route="home">
+          <span class="nav-icon">⌂</span>
+          <span>总览</span>
+        </a>
+        <a href="#/stats" class="nav-item" data-route="stats">
+          <span class="nav-icon">◈</span>
+          <span>归纳统计</span>
+        </a>
+        <div class="nav-section">科目</div>
+        <div id="subjectNav"></div>
+      </nav>
+      <div class="sidebar-footer">
+        <button type="button" class="btn btn-ghost btn-sm" id="btnExport" title="导出备份">导出备份</button>
+        <button type="button" class="btn btn-ghost btn-sm" id="btnImport" title="导入备份">导入</button>
+        <input type="file" id="importFile" accept="application/json,.json" hidden />
+      </div>
+    </aside>
+
+    <div class="main-wrap">
+      <header class="topbar">
+        <button type="button" class="btn btn-ghost btn-icon" id="menuToggle" aria-label="打开菜单">☰</button>
+        <div class="topbar-title" id="pageTitle">总览</div>
+        <div class="topbar-actions">
+          <button type="button" class="btn btn-primary" id="btnQuickAdd">＋ 记一题</button>
+        </div>
+      </header>
+      <main class="content" id="content" tabindex="-1"></main>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" hidden>
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <h2 id="modalTitle">记一题</h2>
+        <button type="button" class="btn btn-ghost btn-icon" id="modalClose" aria-label="关闭">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer" id="modalFooter"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <!-- Hidden file inputs for OCR (web / fallback) -->
+  <input type="file" id="ocrCameraInput" accept="image/*" capture="environment" hidden />
+  <input type="file" id="ocrAlbumInput" accept="image/*" hidden />
+
+  <script src="vendor/katex/katex.min.js"></script>
+  <script src="vendor/katex/contrib/auto-render.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/ocr.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

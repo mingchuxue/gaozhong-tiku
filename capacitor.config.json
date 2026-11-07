@@ -1,0 +1,13 @@
+{
+  "appId": "com.mingchuxue.tiku",
+  "appName": "高中错题本",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": false
+  },
+  "plugins": {
+    "Camera": {
+      "permissions": ["camera", "photos"]
+    }
+  }
+}
